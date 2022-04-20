@@ -15,10 +15,10 @@ jobs:
         target: ["apk --debug", "ios --no-codesign"]
     steps:
       # Set up Flutter.
-      - name: Clone Flutter repository with master channel
+      - name: Clone Flutter repository with  stable
         uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
         with:
-          channel: main
+          channel: stable
       - run: flutter config --enable-macos-desktop
       - run: flutter doctor -v
 
