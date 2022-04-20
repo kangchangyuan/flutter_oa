@@ -28,3 +28,8 @@ jobs:
       - run: flutter pub get -v
 
       - run: flutter build ${{ matrix.target }}
+      - name: Publish iOS Artefacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: release-ios
+          path: build-output/ios
