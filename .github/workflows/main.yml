@@ -14,3 +14,8 @@ jobs:
         architecture: x64
     - run: flutter pub get
     - run: flutter build ios --release --no-codesign  
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "release.tar.gz,foo/*.txt"
+        bodyFile: "body.md"
+        token: ${{ secrets.FLUTTER_TOKEN }}
