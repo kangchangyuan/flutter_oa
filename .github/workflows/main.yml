@@ -5,25 +5,12 @@ on:
       - main
 jobs:
   build:
-    name: Build ${{ matrix.target }}
     runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        target: ["apk --debug", "ios --no-codesign"]
     steps:
-      # Set up Flutter.
-      - name: Clone Flutter repository with  stable
-        uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
-        with:
-          channel: stable
-      - run: flutter config --enable-macos-desktop
-      - run: flutter doctor -v
-
-      # Checkout gallery code and get packages.
-      - name: Checkout gallery code
-        uses: actions/checkout@v2
-      - run: flutter pub get -v
-
-      - run: flutter build ${{ matrix.target }}
-  
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '2.10.4'
+        architecture: x64
+    - run: flutter pub get
+    - run: flutter build ios --release --no-codesign  
